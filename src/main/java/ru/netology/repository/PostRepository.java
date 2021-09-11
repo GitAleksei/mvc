@@ -1,6 +1,7 @@
 package ru.netology.repository;
 
 import org.springframework.stereotype.Repository;
+import ru.netology.exception.NotFoundException;
 import ru.netology.model.Post;
 
 import java.util.ArrayList;
@@ -35,6 +36,10 @@ public class PostRepository {
   }
 
   public void removeById(long id) {
-    posts.remove(id);
+    if (posts.containsKey(id)) {
+      posts.remove(id);
+    } else {
+      throw new NotFoundException();
+    }
   }
 }
